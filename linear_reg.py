@@ -3,8 +3,9 @@ import numpy as np
 class LinearRegression:
     def __init__(self, **options):
         self.options = {
-            'learning_rate': 0.01,
-            'iterations': 1000,
+            'learning_rate': 0.1,
+            'iterations': 100,
+            'batch_size': 0,
             **options
         }
         
@@ -18,8 +19,13 @@ class LinearRegression:
         X1 = np.c_[np.ones(X.shape[0]), X]
         self.weights = np.zeros(X.shape[1] + 1)
         
-        for _ in range(self.options['iterations']):
-            self.gradient_descent(X1, y)
+        for i in range(self.options['iterations']):
+            batch_size = self.options['batch_size'] or X.shape[0]
+            batch_qty = X.shape[0] // batch_size
+            for j in range(batch_qty):
+                    start = batch_size * j
+                    end = start + batch_size
+                    self.gradient_descent(X1[start:end], y[start:end])
             
     
     def test(self, X):
