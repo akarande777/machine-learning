@@ -14,7 +14,6 @@ class LinearRegression:
         self.slopes = (X1.transpose().dot(diff) / X1.shape[0]).transpose()
         self.weights = self.weights - self.slopes * self.options['learning_rate']
         
-        
     def train(self, X, y):
         X1 = np.c_[np.ones(X.shape[0]), X]
         self.weights = np.zeros(X.shape[1] + 1)
@@ -27,11 +26,9 @@ class LinearRegression:
                     end = start + batch_size
                     self.gradient_descent(X1[start:end], y[start:end])
             
-    
     def test(self, X):
         X1 = np.c_[np.ones(X.shape[0]), X]
         return X1.dot(self.weights)
-    
     
     def accuracy(self, X, y):
         X1 = np.c_[np.ones(X.shape[0]), X]

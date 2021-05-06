@@ -17,14 +17,14 @@ sc = StandardScaler()
 X_train_sc = sc.fit_transform(X_train)
 X_test_sc = sc.fit_transform(X_test)
 
+# Linear Regression
 le = LinearRegression(batch_size=4, iterations=20)
-
 le.train(X_train_sc, y_train)
 
-size = X_train.shape[0]
+y_pred = le.test(X_train_sc).reshape(X_train.shape[0], 1)
 
 plt.scatter(X_test, y_test, color = 'red')
-plt.plot(X_train, le.test(X_train_sc).reshape(size, 1), color = 'blue')
+plt.plot(X_train, y_pred, color = 'blue')
 plt.title('Salary vs Experience (Training set)')
 plt.xlabel('Years of Experience')
 plt.ylabel('Salary')
