@@ -1,6 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from linear_reg import LinearRegression
 
 dataset = pd.read_csv('data/Salary_Data.csv')
 
@@ -18,10 +17,12 @@ X_train_sc = sc.fit_transform(X_train)
 X_test_sc = sc.fit_transform(X_test)
 
 # Linear Regression
+from algorithms.linear_reg import LinearRegression
+
 le = LinearRegression(batch_size=4, iterations=20)
 le.train(X_train_sc, y_train)
 
-y_pred = le.test(X_train_sc).reshape(X_train.shape[0], 1)
+y_pred = le.predict(X_train_sc).reshape(X_train.shape[0], 1)
 
 plt.scatter(X_test, y_test, color = 'red')
 plt.plot(X_train, y_pred, color = 'blue')

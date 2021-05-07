@@ -27,10 +27,10 @@ X_test_sc = np.array(X_test)
 X_test_sc[:, -3:] = sc.fit_transform(X_test[:, -3:])
 
 # Linear Regression
-from linear_reg import LinearRegression
-le = LinearRegression(batch_size=15, iterations=20)
+from algorithms.linear_reg import LinearRegression
 
+le = LinearRegression(batch_size=15, iterations=20)
 le.train(X_train_sc, y_train)
 
 print(y_test)
-print(le.test(X_test_sc))
+print(le.predict(X_test_sc))
