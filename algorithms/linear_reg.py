@@ -11,12 +11,15 @@ class LinearRegression:
         
     def gradient_descent(self, X1, y):
         diff = X1.dot(self.weights) - y
-        self.slopes = (X1.transpose().dot(diff) / X1.shape[0]).transpose()
+        self.slopes = X1.transpose().dot(diff) / X1.shape[0]
         self.weights = self.weights - self.slopes * self.options['learning_rate']
         
     def train(self, X, y):
         X1 = np.c_[np.ones(X.shape[0]), X]
-        self.weights = np.zeros(X.shape[1] + 1)
+        if len(y.shape) == 1:
+            self.weights = np.zeros(X1.shape[1])
+        elif len(y.shape) == 2:
+            self.weights = np.zeros((X1.shape[1], y.shape[1]))
         
         for i in range(self.options['iterations']):
             batch_size = self.options['batch_size'] or X.shape[0]
