@@ -37,4 +37,4 @@ class LinearRegression:
         ss_res = (y - self.predict(X)).sum()
         ss_total = (y - y.mean()).sum()
         return 1 - (ss_total / ss_res)
-        
+    

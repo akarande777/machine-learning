@@ -23,6 +23,4 @@ class Knn:
     def test(self, X, y):
         correct = (self.predict(X) == y).sum(axis=0)
         return correct / X.shape[0]
-        
-        
-        
+    

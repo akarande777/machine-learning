@@ -39,3 +39,4 @@ class LogisticRegression:
     def test(self, X, y):
         incorrect = np.abs((y - self.predict(X))).sum(axis=0)
         return (X.shape[0] - incorrect) / X.shape[0]
+    
