@@ -1,5 +1,7 @@
 import numpy as np
 
+sigmoid = lambda z: 1 / (1 + np.exp(-z))
+
 class LogisticRegression:
     def __init__(self, **options):
         self.options = {
@@ -9,12 +11,9 @@ class LogisticRegression:
             **options
         }
         
-    def sigmoid(self, z):
-        return 1 / (1 + np.exp(-z))
-        
-    def gradient_descent(self, X1, y):
+    def __grad_d(self, X1, y):
         # diff = sigmoid(mx + b) - y
-        diff = self.sigmoid(X1.dot(self.weights)) - y
+        diff = sigmoid(X1.dot(self.weights)) - y
         self.slopes = X1.transpose().dot(diff) / X1.shape[0]
         self.weights = self.weights - self.slopes * self.options['learning_rate']
         
@@ -31,11 +30,11 @@ class LogisticRegression:
             for j in range(batch_qty):
                     start = batch_size * j
                     end = start + batch_size
-                    self.gradient_descent(X1[start:end], y[start:end])
+                    self.__grad_d(X1[start:end], y[start:end])
             
     def predict(self, X):
         X1 = np.c_[np.ones(X.shape[0]), X]
-        return self.sigmoid(X1.dot(self.weights)).round()
+        return sigmoid(X1.dot(self.weights)).round()
         
     def test(self, X, y):
         incorrect = np.abs((y - self.predict(X))).sum(axis=0)
