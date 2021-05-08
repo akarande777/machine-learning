@@ -28,10 +28,8 @@ sc = StandardScaler()
 X_train_sc = sc.fit_transform(X_train)
 X_test_sc = sc.fit_transform(X_test)
 
-# Logistic Regression
-from algorithms.logistic_reg import LogisticRegression
+# Testing algorithm
+from algorithms.knn import Knn
+knn = Knn(X_train_sc, y_train)
 
-le = LogisticRegression(batch_size=15, iterations=20)
-le.train(X_train_sc, y_train)
-
-print(le.test(X_test_sc, y_test))
+print(knn.test(X_test_sc, y_test))

@@ -6,7 +6,7 @@ dataset = pd.read_csv('data/Position_Salaries.csv')
 X = dataset.iloc[:, 1:2].values
 y = dataset.iloc[:, -1].values
 
-# Split into training set and test set
+# Splitting into the training set and test set
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
 
