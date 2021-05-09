@@ -1,5 +1,4 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 
 dataset = pd.read_csv('data/Cars_Data.csv')
@@ -27,7 +26,7 @@ X_test_sc = sc.fit_transform(X_test)
 # Logistic Regression
 from algorithms.logistic_reg import LogisticRegression
 
-le = LogisticRegression(batch_size=15, iterations=20)
-le.train(X_train_sc, y_train)
+reg = LogisticRegression(batch_size=15, iterations=20)
+reg.train(X_train_sc, y_train)
 
-print(le.test(X_test_sc, y_test))
+print(reg.test(X_test_sc, y_test))

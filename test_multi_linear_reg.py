@@ -1,5 +1,4 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 
 dataset = pd.read_csv('data/50_Startups.csv')
@@ -29,8 +28,8 @@ X_test_sc[:, -3:] = sc.fit_transform(X_test[:, -3:])
 # Linear Regression
 from algorithms.linear_reg import LinearRegression
 
-le = LinearRegression(batch_size=15, iterations=20)
-le.train(X_train_sc, y_train)
+reg = LinearRegression(batch_size=15, iterations=20)
+reg.train(X_train_sc, y_train)
 
 print(y_test)
-print(le.predict(X_test_sc))
+print(reg.predict(X_test_sc))

@@ -3,28 +3,26 @@ import matplotlib.pyplot as plt
 
 dataset = pd.read_csv('data/Position_Salaries.csv')
 
-X = dataset.iloc[:, 1:2].values
-y = dataset.iloc[:, -1].values
-
-# Splitting into the training set and test set
-from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+X_train = dataset.iloc[:, 1:2].values
+y_train = dataset.iloc[:, -1].values
 
 # Feature Scaling
 from sklearn.preprocessing import StandardScaler, PolynomialFeatures
 sc = StandardScaler()
 X_train_sc = sc.fit_transform(X_train)
-X_test_sc = sc.fit_transform(X_test)
 
 pf = PolynomialFeatures(degree = 4)
 X_train_poly = pf.fit_transform(X_train_sc)
-X_test_poly = pf.fit_transform(X_test_sc)
 
 # Linear Regression
 from algorithms.linear_reg import LinearRegression
+reg = LinearRegression()
 
-le = LinearRegression()
-le.train(X_train_poly, y_train)
+reg.train(X_train_poly, y_train)
 
-print(y_train)
-print(le.predict(X_train_poly))
+plt.scatter(X_train, y_train, color = 'red')
+plt.plot(X_train, reg.predict(X_train_poly), color = 'blue')
+plt.title('Truth or Bluff (Linear Regression)')
+plt.xlabel('Position Level')
+plt.ylabel('Salary')
+plt.show()
